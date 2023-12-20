@@ -1,0 +1,55 @@
+﻿@model IEnumerable<ForumIT.Models.TblDaLuu>
+
+@{
+    ViewData["Title"] = "ListSaved";
+    ForumITContext db = new ForumITContext();
+    int count = Model.Count();
+}
+
+
+<h2>Số lượng bài viết đã lưu: @count</h2>
+
+@section Test{
+    <aside class="col-md-3 sidebar97239" style="margin-top:100px">
+        <div class="categori-part329">
+            <img src="/1Forum/image/logoApp.png" alt="Logo" width="200px" height="100px">
+        </div>
+    </aside>
+    }
+
+@foreach (var item in Model) {
+
+
+            TblBaiViet bv = db.TblBaiViets.Find(item.IdBaiVietDl);
+
+            <div class="question-type2033">
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="left-user12923 left-user12923-repeat">
+                            <a href="#"><img src="/1Forum/image/images.png" alt="image"> </a> <a href="#"><i class="fa fa-check" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="right-description893">
+                            <div id="que-hedder2983">
+                                <h3><a asp-action="PostDetail" asp-controller="PostMN" asp-route-idBV="@bv.IdBaiViet"> @bv.Title</a></h3>
+                            </div>
+                            <div class="ques-details10018">
+                                <p>@bv.NoiDung</p><br>
+                                <p>Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis.</p>
+                            </div>
+                            <hr>
+                            <div class="ques-icon-info3293"> <a href="#"><i class="fa fa-star" aria-hidden="true"> 5 </i> </a> <a href="#"><i class="fa fa-folder" aria-hidden="true"> wordpress</i></a> <a href="#"><i class="fa fa-clock-o" aria-hidden="true"> 4 min ago</i></a> <a href="#"><i class="fa fa-question-circle-o" aria-hidden="true"> Question</i></a> <a href="#"><i class="fa fa-bug" aria-hidden="true"> Report</i></a> </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="ques-type302">
+                            
+                            <button class="btn btn-danger"><a asp-controller="SavedMN" asp-action="DeleteSaved" asp-route-idl="@item.IdDaluu" asp-route-idbv="@item.IdBaiVietDl" style="color:white">Xóa xem sau</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+ 
+}
+

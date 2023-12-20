@@ -1,0 +1,78 @@
+﻿@model IEnumerable<ForumIT.Models.TblLoaiDd>
+
+@{
+    ViewData["Title"] = "ListLoaiDD";
+}
+@section Test{
+    <aside class="col-md-3 sidebar97239" style="margin-top:100px">
+        <div class="categori-part329">
+            <img src="/1Forum/image/logoApp.png" alt="Logo" width="200px" height="100px">
+        </div>
+    </aside>
+    }
+
+<h2>ListLoaiDD</h2>
+
+<p>
+    <a asp-action="CreateLoaiDD">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLoaiDd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenLoaiDd)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLoaiDd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenLoaiDd)
+            </td>
+            <td>
+                    @Html.ActionLink("Update", "UpdateLoaiDD", new {  id=item.IdLoaiDd }) |
+                    @Html.ActionLink("Detail", "DetailLoaiDD", new {  id=item.IdLoaiDd }) |
+                    @*Html.ActionLink("Delete", "DeleteLoaiDD", new {  id=item.IdLoaiDd })*@
+
+                    <div class="btn btn-warning"> <a style="cursor:pointer" onclick="confirmDeletedType(@item.IdLoaiDd)">Xóa Loại</a></div>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<script>
+    function confirmDeletedType(id) {
+
+        if (confirm("Bạn có chắc chắn muộn xóa không?")) {
+            deleteItemT(id);
+        } else {
+
+        }
+    }
+
+    function deleteItemT(id) {
+        var getUrl = "/TypeMN/DeleteLoaiDD/" + id;
+        $.ajax({
+            url: getUrl,
+            type: 'GET',
+            success: function (data) {
+                alert('Delete Success');
+                window.location = "/TypeMN/ListLoaiDD";
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+
+        });
+    }
+
+</script>

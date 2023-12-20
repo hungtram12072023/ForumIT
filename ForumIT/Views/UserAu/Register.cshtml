@@ -1,0 +1,72 @@
+﻿@model ForumIT.Models.DTO.RegisterDTO
+
+@section Test{
+    <aside class="col-md-3 sidebar97239" style="margin-top:100px">
+        <div class="categori-part329" >
+            <img src="/1Forum/image/logoApp.png" alt="Logo" width="200px" height="100px">
+        </div>
+    </aside>
+    }
+
+<div class="modal-wrap">
+
+    <div class="modal-bodies">
+        <div class="modal-body modal-body-step-1 is-showing">
+            <div class="title">Sign Up</div>
+            <div class="description">Hello there, Register Form</div>
+
+            <form asp-action="Register" method="post">
+                            <div >
+                                                <!--label>First Name</!--label-->
+                    <input type="text" class="form-control" asp-for="FirstName" placeholder="FirstName*" />
+                                <span class="text-danger" asp-validation-for="FirstName"></span>
+
+                            </div>
+                            <div >
+                                                <!--label>Last Name</!--label-->
+                    <input type="text" class="form-control" asp-for="LastName" placeholder="LastName*" />
+                                <span class="text-danger" asp-validation-for="LastName"></span>
+
+                            </div>
+
+                            <div >
+                                                <!--label>User Name</!--label-->
+                    <input type="text" class="form-control" asp-for="UserName" placeholder="UserName*" />
+                                <span class="text-danger" asp-validation-for="UserName"></span>
+                            </div>
+
+                            <div >
+                                                <!--label>Email</!--label-->
+                    <input type="text" class="form-control" asp-for="Email" placeholder="Email*" />
+                                <span class="text-danger" asp-validation-for="Email"></span>
+                            </div>
+
+                            <div >
+                                                <!--label>Password</!--label-->
+                    <input type="password" class="form-control" asp-for="Password" placeholder="Password*" />
+                                <span class="text-danger" asp-validation-for="Password"></span>
+                            </div>
+
+                            <div >
+                                                <!--label>Confirm Password</!--label-->
+                    <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="ConfirmPassword*" />
+                                <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                            </div>
+
+                <input type="submit" value="Register" class="button">
+
+                            @* @if (TempData["msg"] != null)
+                            {
+                            <div class="form-group">
+                            <span class="text-info">@TempData["msg"]</span>
+                            </div>
+                            }*@
+
+                <a href="/UserAu/Login" class="button"> Login</a>
+            </form>
+           
+        </div>
+
+
+    </div>
+</div>

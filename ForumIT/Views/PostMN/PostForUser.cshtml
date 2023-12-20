@@ -1,0 +1,68 @@
+﻿@model IEnumerable<ForumIT.Models.TblBaiViet>
+
+@{
+    ViewData["Title"] = "PostForUser";
+    ForumITContext db = new ForumITContext();
+}
+
+
+@section Test{
+    <aside class="col-md-3 sidebar97239" style="margin-top:100px">
+        <div class="categori-part329">
+            <img src="/1Forum/image/logoApp.png" alt="Logo" width="200px" height="100px">
+        </div> 
+    </aside>
+    }
+
+@foreach (var item in Model) {
+
+            <div class="about-user2039 mt-70">
+                <div class="user-title3930">
+                    <h3>    
+                        Title: <a asp-action="PostDetail" asp-controller="PostMN" asp-route-idBV="@item.IdBaiViet"> @item.Title</a>
+
+                        <span class="badge229">
+                            <a href="#">punit</a>
+                        </span>
+                    </h3>
+                    <hr>
+                </div>
+                <div class="user-image293"> <img src="/1Forum/Image/images.png" alt="Image"> </div>
+                <div class="user-list10039">
+                    <div class="ul-list-user-left29">
+                        <ul>
+                            <li><i class="fa fa-plus" aria-hidden="true"></i> <strong>Time:</strong> @item.Ngaydang</li>
+                            @{
+                                TblLoaiDd dd = db.TblLoaiDds.Find(@item.IdLdd);
+                            }
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Type:</strong> @dd.TenLoaiDd</li>
+                            <li><i class="fa fa-heart" aria-hidden="true"></i> <strong>Status:</strong> @item.TrangThai</li>
+                            <li><i class="fa fa-globe" aria-hidden="true"></i> <strong>Website:</strong><a href="#">view</a></li>
+                        </ul>
+                    </div>
+                    <div class="ul-list-user-right29">
+                        <img src="/Uploads/@item.Img" width="200px">
+                    </div>
+                </div>
+                <div class="user-description303">
+                    <p>@item.NoiDung</p><br>
+                    <p>Duis dapibus aliquam mi, eget euismod sem scelerisque ut. Vivamus at elit quis urna adipiscing iaculis. Curabitur vitae velit in neque dictum blandit. Proin in iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vitae velit in neque dictum blandit.</p>
+                    <button><a asp-controller="PostMN" asp-action="DeletePost" asp-route-id="@item.IdBaiViet" style="color:white">Xóa Bài Viết</a></button>
+                    <button><a asp-controller="PostMN" asp-action="UpdatePost" asp-route-idbv="@item.IdBaiViet" style="color:white">Sửa Bài Viết</a></button>
+                </div>
+                <div class="user-social3903">
+                    <p>
+                        Follow : <span>
+                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                            <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a>
+
+                        </span>
+                    </p>
+                </div>
+            </div>
+}

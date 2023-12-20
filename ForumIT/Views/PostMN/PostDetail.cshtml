@@ -1,0 +1,143 @@
+﻿@model ForumIT.Models.TblBaiViet
+@using ForumIT.Models;
+@using ForumIT.Models.Domain;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.EntityFrameworkCore;
+@inject UserManager<User> userManager
+
+@{
+    ForumITContext db = new ForumITContext();
+    ViewData["Title"] = "PostDetail";
+
+    DateTime now = DateTime.Now;
+}
+
+<h2>PostDetail</h2>
+
+@section Test{
+    <aside class="col-md-3 sidebar97239" style="margin-top:100px">
+        <div class="categori-part329">
+            <img src="/1Forum/image/logoApp.png" alt="Logo" width="200px" height="100px">
+        </div>
+    </aside>
+    }
+
+<div>
+
+    <div class="post-details">
+        <div class="details-header923">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="post-title-left129">
+                        <h3>@Html.DisplayFor(model => model.Title)</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="post-que-rep-rihght320"> 
+                    @{
+                        TblDaLuu dl = new TblDaLuu();
+                        var userss = await userManager.Users.ToListAsync();
+
+                        var usersInfoo = new List<User>();
+
+
+
+                        foreach (var user in userss)
+                        {
+                            var userInfoo = new User
+                         {
+                                 Id = user.Id,
+                                 UserName = user.UserName,
+                                  Email = user.Email
+                                // Thêm các thông tin khác tùy ý
+                         };
+
+                            usersInfoo.Add(userInfoo);
+                        }
+                        List<User> lstt = usersInfoo.ToList();
+
+                        var idd = userManager.GetUserId(User);
+
+                        foreach (var user in lstt)
+                        {
+                            if (user.Id == idd)
+                            {
+                                dl.IdUser = user.Id;
+                            }
+                        }
+
+
+                        dl.IdBaiVietDl = Model.IdBaiViet;
+
+                        @await Html.PartialAsync("PartialCrDlSaved",dl)
+                       
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post-details-info1982">
+            <p>@Html.DisplayFor(model => model.NoiDung)</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus vulputate posuere nisl quis consequat. Donec congue commodo mi, sed commodo velit fringilla ac. Fusce placerat venenatis mi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras ornare, dolor a aliquet rutrum, dolor turpis condimentum leo, a semper lacus purus in felis. Quisque blandit posuere turpis, eget auctor felis pharetra eu .</p>
+            <hr>
+            <div class="post-footer29032">
+                <div class="l-side2023"> <i class="fa fa-check check2" aria-hidden="true"> solved</i> <a href="#"><i class="fa fa-star star2" aria-hidden="true">  5</i></a> <i class="fa fa-folder folder2" aria-hidden="true"> wordpress</i> <i class="fa fa-clock-o clock2" aria-hidden="true"> 4 min ago</i> <a href="#"><i class="fa fa-commenting commenting2" aria-hidden="true"> 5 answer</i></a> <i class="fa fa-user user2" aria-hidden="true"> 70 views</i> 
+                    
+                </div>
+            
+                <div class="l-rightside39">
+                    <button type="button" class="tolltip-button thumbs-up2" data-toggle="tooltip" data-placement="bottom" title="Like"><i class="fa fa-thumbs-o-up " aria-hidden="true"></i></button>
+                    <button type="button" class="tolltip-button  thumbs-down2" data-toggle="tooltip" data-placement="bottom" title="Dislike"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i></button> <span class="single-question-vote-result">+22</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+</div>
+
+<div>
+    @{
+        //UserManager<User> userManager =new UserManager<User>;
+
+        var users = await userManager.Users.ToListAsync();
+
+        var usersInfo = new List<User>();
+
+
+        List<TblBinhLuan> tl = db.TblBinhLuans.Where(m=>m.IdidBaiVietBl==Model.IdBaiViet).ToList();
+
+        @await Html.PartialAsync("PartialListBinhLuan",tl)
+
+        TblBinhLuan bl = new TblBinhLuan();
+
+        foreach (var user in users)
+        {
+            var userInfo = new User
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email
+                    // Thêm các thông tin khác tùy ý
+                };
+
+            usersInfo.Add(userInfo);
+        }
+        List<User> lst = usersInfo.ToList();
+
+        var id = userManager.GetUserId(User);
+
+        foreach (var user in lst)
+        {
+            if (user.Id == id)
+            {
+                bl.IdUser = user.Id;
+            }
+        }
+
+        bl.IdidBaiVietBl = Model.IdBaiViet;
+        bl.NgayBl = now;
+
+        @await Html.PartialAsync("PartialCreateCM",bl)
+    }
+    
+</div>

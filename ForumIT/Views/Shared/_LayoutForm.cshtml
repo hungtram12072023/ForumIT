@@ -1,0 +1,308 @@
+﻿
+@{
+    string userName = User.Identity.Name;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="Ask online Form">
+    <meta name="description" content="The Ask is a bootstrap design help desk, support forum website template coded and designed with bootstrap Design, Bootstrap, HTML5 and CSS. Ask ideal for wiki sites, knowledge base sites, support forum sites">
+    <meta name="keywords" content="HTML, CSS, JavaScript,Bootstrap,js,Forum,webstagram ,webdesign ,website ,web ,webdesigner ,webdevelopment,blog,template">
+    <meta name="robots" content="index, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <link href="~/1Forum/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/1Forum/css/style.css" rel="stylesheet" type="text/css">
+    <link href="~/1Forum/css/editor.css" rel="stylesheet" type="text/css">
+    <link href="~/1Forum/css/animate.css" rel="stylesheet" type="text/css"> 
+    <link href="~/1Forum/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/1Forum/css/responsive.css" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="~/1Forum/css/loginstyle.css" type="text/css">
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="navbar-menu-left-side239">
+                        <ul>
+                            <li><a href="#" target="_blank"><i class="fa fa-envelope-o" aria-hidden="true"></i>Contact</a></li>
+                            <li><a href="#" target="_blank"><i class="fa fa-headphones" aria-hidden="true"></i>Support</a></li>
+                            <li><a href="#" target="_blank"><i class="fa fa-user" aria-hidden="true"></i>Address</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="top-menu-bottom932">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                    <a class="navbar-brand" href="#"><img src="/1Forum/image/logo.png" alt="Logo"></a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav"> </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a asp-action="Index" asp-controller="Home">Home</a></li>
+
+                        @if (User.IsInRole("user") || string.IsNullOrEmpty(userName))
+                        {
+                            <li><a asp-action="CreatePost" asp-controller="PostMN">Ask Question</a></li>
+                            <li><a asp-action="ListSaved" asp-controller="SavedMN">Saved</a></li>
+                        }
+                        
+                        
+                        @if (User.IsInRole("admin"))
+                        {
+                            <li class="dropdown">
+                                <!--a class="nav-link dropdown-toggle" asp-action="HelloAd" asp-controller="Admin">Admin</!--a-->
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, @User.Identity.Name</a>
+
+                                <ul class="dropdown-menu animated zoomIn" aria-labelledby="navbarLightDropdownMenuLink">
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item" asp-action="ListLoaiDD" asp-controller="TypeMN">Type Manager</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item" asp-action="PostForAdmin" asp-controller="PostMN">Post Manager</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item" asp-action="ListUser" asp-controller="UserMN">User Manager</a>
+                                    </li>
+                                    
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item" asp-action="Logout" asp-controller="UserAu">LogOut</a>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        }
+
+                        @if (User.IsInRole("user"))
+                        {
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hello, @User.Identity.Name</a>
+
+                                <ul class="dropdown-menu animated zoomIn" aria-labelledby="navbarLightDropdownMenuLink">
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item" asp-action="getProfile" asp-controller="UserMN">Profile Manager</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item" asp-action="PostForUser" asp-controller="PostMN">Question Manager</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item" asp-action="changePass" asp-controller="UserMN">Change Password</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link dropdown-item" asp-action="Logout" asp-controller="UserAu">LogOut</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                        }
+
+                        @if (string.IsNullOrEmpty(userName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-action="Login" asp-controller="UserAu">Login</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </div>
+    <!--===breadcrumb=====-->
+
+    <section class="header-descriptin329">
+        <div class="container">
+            <h3>@ViewData["Title"]</h3>
+            @RenderSection("Admin" ,false)
+        </div>
+    </section>
+
+
+    <!--New-->
+
+    <section class="main-content920">
+        <div class="container">
+            <div class="row">
+
+                @RenderSection("Test", required: false)
+
+                <div class="col-md-9">
+
+                    <div id="main" class="text-center">
+
+                        @RenderBody()
+
+                    </div>
+                </div>    
+                   
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!--    footer -->
+    <div class="footer-search">
+        <div class="container">
+            <div class="row">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-12">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <input type="text" class="  search-query form-control user-control30" placeholder="Search here...." /> <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button">
+                                <span class=" glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="footer-part">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="info-part-one320">
+                        <h4>Where We Are ?</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit amet suscipit risus ultrices eu.</p>
+                        <h4>Address :</h4>
+                        <p>
+                            Ask Me Network, 33 Street, syada
+                            <br> Zeinab, Cairo, Egypt.
+                        </p>
+                        <h4>Support :</h4>
+                        <p>Support Telephone No : (+2)01111011110</p>
+                        <p>Support Email Account : </p>
+                        <p>info@example.com</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-part-two320">
+                        <h4>Quick Links</h4>
+                        <a href="#">
+                            <p>-Home</p>
+                        </a>
+                        <a href="#">
+                            <p>-Ask Question</p>
+                        </a>
+                        <a href="#">
+                            <p>-Questions</p>
+                        </a>
+                        <a href="#">
+                            <p>-Users</p>
+                        </a>
+                        <a href="#">
+                            <p>-Edit Profile</p>
+                        </a>
+                        <a href="#">
+                            <p>-Page</p>
+                        </a>
+                        <a href="#">
+                            <p>-Contact Us</p>
+                        </a>
+                        <a href="#">
+                            <p>-Buy now</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-part-three320">
+                        <h4>Popular Questions</h4>
+                        <div class="news-info209">
+                            <h5>Why are the British confused</h5>
+                            <p>(Why I darest say, they darest not get offended when they so ...</p> <small>July 16, 2017</small>
+                        </div>
+                        <div class="news-info209">
+                            <h5>How to approach applying for</h5>
+                            <p>(I am trying to find/change my career trajectory. Its a good cozy ...</p> <small>July 16, 2017</small>
+                        </div>
+                        <div class="news-info209">
+                            <h5>How to evaluate whether a</h5>
+                            <p>A friend of mine is the CEO of his own small business. ...</p> <small>July 16, 2017</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="info-part-four320">
+                        <h4>Latest Tweets</h4>
+                        <div class="tweet-details29">
+                            <p>
+                                <i class="fa fa-twitter-square" aria-hidden="true"></i><a href="#">
+                                    codeThemesCheck a new update #AskMe #ThemeForest #WordPress #2code #Envato#2code
+                                    Themehttps://t.co/urb3LgsOCi
+                                </a>
+                            </p> <small>about 2 weeks ago</small>
+                        </div>
+                        <div class="tweet-details29">
+                            <p>
+                                <i class="fa fa-twitter-square" aria-hidden="true"></i><a href="#">
+                                    codeThemesCheck a new update #AskMe #ThemeForest #WordPress #2code #Envato#2code
+                                    Themehttps://t.co/urb3LgsOCi
+                                </a>
+                            </p> <small>about 2 weeks ago</small>
+                        </div>
+                        <div class="tweet-details29">
+                            <p>
+                                <i class="fa fa-twitter-square" aria-hidden="true"></i><a href="#">
+                                    codeThemesCheck a new update #AskMe #ThemeForest #WordPress #2code #Envato#2code
+                                    Themehttps://t.co/urb3LgsOCi
+                                </a>
+                            </p> <small>about 2 weeks ago</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="footer-social">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Copyright 2023 Ask me | <strong>Nhóm 01- WEB Nâng Cao</strong></p>
+                </div>
+                <div class="col-md-6">
+                    <div class="social-right2389"> <a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-skype" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a> <a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a> </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="~/1Forum/js/jquery-3.1.1.min.js"></script>
+    <script src="~/1Forum/js/bootstrap.min.js"></script>
+    <script src="~/1Forum/js/editor.js"></script>
+    <script src="~/1Forum/js/npm.js"></script>
+    <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+    @RenderSection("DoanJS",false)
+
+</body>
+
+</html>

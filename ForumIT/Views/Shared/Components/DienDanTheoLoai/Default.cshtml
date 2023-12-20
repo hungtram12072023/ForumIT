@@ -1,0 +1,13 @@
+﻿@model IEnumerable<TblLoaiDd>
+
+<nav class="menu">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li class="OK">
+                <a class="nav-link text-dark" asp-controller="PostMN" asp-action="PostForIdDuyet" asp-route-id="@item.IdLoaiDd">@item.TenLoaiDd</a>
+            </li>
+        }
+    </ul>
+</nav>
+

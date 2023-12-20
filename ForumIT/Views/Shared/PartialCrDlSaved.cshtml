@@ -1,0 +1,50 @@
+﻿@model ForumIT.Models.TblDaLuu
+
+
+<div class="row">
+
+    @{
+        TblDaLuu dll = new TblDaLuu();
+        dll.IdBaiVietDl = Model.IdBaiVietDl;
+
+        dll.IdUser = Model.IdUser;
+
+        ForumITContext db = new ForumITContext();
+
+        List<TblDaLuu> dsluu = db.TblDaLuus.ToList();
+
+        TblDaLuu dlll = dsluu.Find(x => x.IdBaiVietDl == dll.IdBaiVietDl && x.IdUser == dll.IdUser);
+
+
+        if (dlll == null)
+        {
+            <div class="col-md-4">
+                <form asp-controller="SavedMN" asp-action="CreateSaved" method="post">
+                    <div style="display:none">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="IdDaluu" class="control-label"></label>
+                            <input asp-for="IdDaluu" class="form-control" />
+                            <span asp-validation-for="IdDaluu" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IdBaiVietDl" class="control-label"></label>
+                            <input asp-for="IdBaiVietDl" class="form-control" />
+                            <span asp-validation-for="IdBaiVietDl" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IdUser" class="control-label"></label>
+                            <input asp-for="IdUser" class="form-control" />
+                            <span asp-validation-for="IdUser" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Lưu vào xem sau" class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+        }
+
+    }
+</div>
+

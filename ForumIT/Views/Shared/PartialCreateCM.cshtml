@@ -1,0 +1,59 @@
+﻿@model ForumIT.Models.TblBinhLuan
+
+@{
+    ViewData["Title"] = "CreateCommment";
+}
+
+<hr />
+<div id="ThemBinhLuan">
+    <h2>Create Commment For Post</h2>
+        <form asp-action="CreateCommment" asp-controller="Comment" method="post">
+            <!--div asp-validation-summary="ModelOnly" class="text-danger"></!--div-->
+            <div style="display:none">
+
+                    <div class="form-group">
+                    <label asp-for="IdBinhLuan" class="control-label"></label>
+                    <input asp-for="IdBinhLuan" class="form-control" />
+                    <span asp-validation-for="IdBinhLuan" class="text-danger"></span>
+                    </div>
+                        <!--div class="form-group">
+                            <label asp-for="NoiDung" class="control-label"></label>
+                            <input asp-for="NoiDung" class="form-control" />
+                            <span asp-validation-for="NoiDung" class="text-danger"></span>
+                        </!--div-->
+                        <div class="form-group">
+                            <label asp-for="IdidBaiVietBl" class="control-label"></label>
+                            <input asp-for="IdidBaiVietBl" class="form-control" />
+                            <span asp-validation-for="IdidBaiVietBl" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IdUser" class="control-label"></label>
+                            <input asp-for="IdUser" class="form-control" />
+                            <span asp-validation-for="IdUser" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NgayBl" class="control-label"></label>
+                            <input asp-for="NgayBl" class="form-control" />
+                            <span asp-validation-for="NgayBl" class="text-danger"></span>
+                        </div>
+
+            </div>
+           
+            <div class="comment289-box">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="post9320-box">
+                            <input asp-for="NoiDung" class="comment-input219882" placeholder="Enter Your Post">
+                        </div>
+                        <button type="submit" class="pos393-submit">Post Your Answer</button>
+                    </div>
+
+                </div>
+            </div>
+            <!--div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </!--div-->
+        </form>
+</div>
+
+

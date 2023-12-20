@@ -1,0 +1,141 @@
+﻿@using ForumIT.Models.Domain;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.EntityFrameworkCore;
+@model IEnumerable<ForumIT.Models.TblBaiViet>
+@inject UserManager<User> userManager
+@{
+    ViewData["Title"] = "Home";
+    ForumITContext db = new ForumITContext();
+}
+
+
+@section Test{
+    <aside class="col-md-3 sidebar97239">
+        <div class="text-center"><h2>Loại Diễn Đàn</h2></div>
+        <div class="categori-part329">
+            @await Component.InvokeAsync("DienDanTheoLoai")
+        </div>
+    </aside>
+ }
+
+
+
+<h2>ListPost</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdBaiViet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Img)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoiDung)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLdd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ngaydang)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+
+            var users = await userManager.Users.ToListAsync();
+
+            var usersInfo = new List<User>();
+
+            string name = "";
+
+            foreach (var user in users)
+            {
+                var userInfo = new User
+                    {
+                        Id = user.Id,
+                        UserName = user.UserName,
+                        Email = user.Email
+                        // Thêm các thông tin khác tùy ý
+                    };
+
+                usersInfo.Add(userInfo);
+            }
+            List<User> lst = usersInfo.ToList();
+
+            //var id = userManager.GetUserId(User);
+
+            foreach (var user in lst)
+            {
+                if (user.Id == item.IdUser)
+                {
+                    name = user.UserName;
+                }
+            }
+
+            //string ndung = item.NoiDung;
+
+            <div class="blog-part3903">
+                <img src="/Uploads/@item.Img" alt="Image" class="img-responsive" width="100%" height="400px">
+
+                <div class="blog-details3902">
+                    <h3><span><i class="fa fa-picture-o" aria-hidden="true"></i></span> @item.Title</h3>
+                    <hr>
+                    <div class="ques-icon-info2933"> <a href="#"><i class="fa fa-user" aria-hidden="true"> @name </i></a> <a href="#"><i class="fa fa-calendar" aria-hidden="true"> @item.Ngaydang</i></a> <a href="#"><i class="fa fa-briefcase" aria-hidden="true"> work</i></a> <a href="#"><i class="fa fa-comments-o" aria-hidden="true"> 2 comments</i></a> <a href="#"><i class="fa fa-eye" aria-hidden="true"> 179 viwes</i></a> </div>
+                    <p>@item.NoiDung ...</p>
+                    <div class="continue-deatils738">
+                        <a asp-action="PostDetail" asp-controller="PostMN" asp-route-idBV="@item.IdBaiViet"><i class="fa fa-plus" aria-hidden="true"> Continue Reading</i></a>
+                    </div>
+                </div>
+            </div>
+
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdBaiViet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Img)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrangThai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLdd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ngaydang)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

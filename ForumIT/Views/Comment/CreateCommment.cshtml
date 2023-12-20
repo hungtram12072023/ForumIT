@@ -1,0 +1,44 @@
+﻿@model ForumIT.Models.TblBinhLuan
+
+<h4>TblBinhLuan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateCommment">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdBinhLuan" class="control-label"></label>
+                <input asp-for="IdBinhLuan" class="form-control" />
+                <span asp-validation-for="IdBinhLuan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NoiDung" class="control-label"></label>
+                <input asp-for="NoiDung" class="form-control" />
+                <span asp-validation-for="NoiDung" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdidBaiVietBl" class="control-label"></label>
+                <input asp-for="IdidBaiVietBl" class="form-control" />
+                <span asp-validation-for="IdidBaiVietBl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdUser" class="control-label"></label>
+                <input asp-for="IdUser" class="form-control" />
+                <span asp-validation-for="IdUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgayBl" class="control-label"></label>
+                <input asp-for="NgayBl" class="form-control" />
+                <span asp-validation-for="NgayBl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

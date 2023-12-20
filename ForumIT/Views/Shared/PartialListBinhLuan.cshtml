@@ -1,0 +1,192 @@
+﻿@model IEnumerable<ForumIT.Models.TblBinhLuan>
+@using ForumIT.Models.Domain;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.EntityFrameworkCore;
+@inject UserManager<User> userManager
+@{
+
+    DateTime now = DateTime.Now;
+    ViewData["Title"] = "Home";
+    ForumITContext db = new ForumITContext();
+}
+
+<div class="comment-list12993">
+    <div class="container">
+        <div class="row">
+
+            <div class="comments-container">
+                <ul id="comments-list" class="comments-list">
+@foreach(var iem in Model)
+{
+    TblBinhLuan bl = new TblBinhLuan();
+
+    var users = await userManager.Users.ToListAsync();
+
+    var usersInfo = new List<User>();
+
+    string name = "";
+    string idlohgin = "";
+
+    foreach (var user in users)
+    {
+        var userInfo = new User
+                    {
+                        Id = user.Id,
+                        UserName = user.UserName,
+                        Email = user.Email
+                        // Thêm các thông tin khác tùy ý
+                    };
+
+        usersInfo.Add(userInfo);
+    }
+    List<User> lst = usersInfo.ToList();
+
+    var id = userManager.GetUserId(User);
+
+    foreach (var user in lst)
+    {
+        if (user.Id == iem.IdUser)
+        {
+            name = user.UserName;
+            idlohgin = user.Id;
+        }
+    }
+    bl.IdBinhLuan = iem.IdBinhLuan;
+    bl.IdUser = idlohgin;
+    bl.IdidBaiVietBl = iem.IdidBaiVietBl;
+    bl.NgayBl = now;
+    bl.NoiDung = iem.NoiDung;
+
+    
+                        <li>
+                            <div class="comment-main-level">
+                                
+                                <div class="comment-avatar"><img src="/1Forum/image/images.png" alt=""></div>
+                                
+                                <div class="comment-box">
+                                    <div class="comment-head">
+                                        <h6 class="comment-name">
+                                            @if (@name == "Admin")
+                                            {
+                                                <a href="#" style="color:red">@name</a>
+                                            }
+                                            else
+                                            {
+                                                <a href="#">@name</a>
+                                            }
+                                            
+                                            
+                                        </h6>
+                                        <span><i class="fa fa-clock-o"> @iem.NgayBl</i></span>
+                                        <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+                                        @{
+                                        TblBaiViet bv=db.TblBaiViets.Find(iem.IdidBaiVietBl);
+
+                                        if (bv.IdUser == id && id != idlohgin)
+                                        {
+                                        <button class="btn btn-danger"><a asp-controller="Comment" asp-action="DeleteCommment" asp-route-mbl="@iem.IdBinhLuan" asp-route-mbv="@iem.IdidBaiVietBl" style="color:white">Xóa</a></button>
+                                        }
+                                        }
+
+
+                                        @if (User.IsInRole("user") && id == idlohgin)
+                                        {
+                                            //TblBinhLuan x = @bl;
+                                            
+                                                <button class="btn btn-danger"><a asp-controller="Comment" asp-action="DeleteCommment" asp-route-mbl="@iem.IdBinhLuan" asp-route-mbv="@iem.IdidBaiVietBl" style="color:white">Xóa</a></button>
+                                                <Button onclick="display(@iem.IdBinhLuan)" class="btn btn-primary">Sửa</Button>
+
+                                                @await Html.PartialAsync("PartialUpdateCM",@bl)
+
+
+                                            
+                                        }
+                                        @if (User.IsInRole("user"))
+                                        {
+                                                //string xx = "AA" + @iem.IdBinhLuan;
+                                                 int xx = 100 + @iem.IdBinhLuan;
+
+                                                <Button onclick="displayReply(@xx)" class="btn btn-info">Trả lời</Button>
+                                            
+                                        }
+                                    </div>
+                                    <div class="comment-content"> @iem.NoiDung </div>
+                                </div>
+                            </div>
+                           @{
+                                List<TblTraLoiBl> tl = db.TblTraLoiBls.Where(m => m.IdBluanTloi == iem.IdBinhLuan).ToList();
+                                    @await Html.PartialAsync("PartialListTraLoiBL",tl)
+                            }
+
+                        </li>
+
+    {
+        
+
+        TblTraLoiBl tlk = new TblTraLoiBl();
+
+        var userst = await userManager.Users.ToListAsync();
+
+        var usersInfox = new List<User>();
+
+        string namex = "";
+        string idlohginx = "";
+
+        foreach (var user in userst)
+        {
+            var userInfo = new User
+                        {
+                            Id = user.Id,
+                            UserName = user.UserName,
+                            Email = user.Email
+                            // Thêm các thông tin khác tùy ý
+                        };
+
+            usersInfox.Add(userInfo);
+        }
+        List<User> lstk = usersInfox.ToList();
+
+        var ids = userManager.GetUserId(User);
+
+        foreach (var user in lst)
+        {
+            if (user.Id == ids)
+            {
+                name = user.UserName;
+                tlk.IdUser = user.Id;
+            }
+        }
+
+        tlk.IdBluanTloi = iem.IdBinhLuan;
+        tlk.NgayTl = DateTime.Now;
+        @await Html.PartialAsync("PartialCreateTraLoiBL",tlk)
+
+    }
+}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function displayReply(idk) {
+        var objectToHidek = document.getElementById(idk);
+        objectToHidek.style.display = "";
+    }
+
+    function display(bl)
+    {
+        var objectToHide = document.getElementById(bl);
+
+        objectToHide.style.display = "";
+
+    }
+
+
+
+
+ </script>
+
+

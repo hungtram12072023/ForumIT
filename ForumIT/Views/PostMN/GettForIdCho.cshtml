@@ -1,0 +1,99 @@
+﻿
+@model IEnumerable<ForumIT.Models.TblBaiViet>
+
+@{
+    ViewData["Title"] = "Chờ";
+    ForumITContext db = new ForumITContext();
+}
+@section Admin{
+    <div>
+        <a asp-action="GettForIdCho" asp-controller="PostMN"><button class="btn btn-primary">Trạng thái chờ</button></a>
+        <a asp-action="GettForIdDuyet" asp-controller="PostMN"><button class="btn btn-success"> Trạng thái Duyệt</button></a>
+    </div>
+}
+
+@section Test{
+    <aside class="col-md-3 sidebar97239" style="margin-top:100px">
+        <div class="categori-part329">
+            <img src="/1Forum/image/logoApp.png" alt="Logo" width="200px" height="100px">
+        </div>
+    </aside>
+    }
+
+
+@foreach (var item in Model) {
+
+            <div class="about-user2039 mt-70">
+                <div class="user-title3930">
+                    <h3>
+                        Title: <a asp-action="PostDetail" asp-controller="PostMN" asp-route-idBV="@item.IdBaiViet"> @item.Title</a>
+
+                        <span class="badge229">
+                            <a href="#">punit</a>
+                        </span>
+                    </h3>
+                    <hr>
+                </div>
+                <div class="user-image293"> <img src="/1Forum/Image/images.png" alt="Image"> </div>
+                <div class="user-list10039">
+                    <div class="ul-list-user-left29">
+                        <ul>
+                            <li><i class="fa fa-plus" aria-hidden="true"></i> <strong>Time:</strong> @item.Ngaydang</li>
+                            @{
+                                TblLoaiDd dd = db.TblLoaiDds.Find(@item.IdLdd);
+                            }
+                            <li><i class="fa fa-map-marker" aria-hidden="true"></i> <strong>Type:</strong> @dd.TenLoaiDd</li>
+                    <li><i class="fa fa-heart" aria-hidden="true"></i> <strong>Status:</strong> <h5 style="color: red">@item.TrangThai</h5></li>
+                            <li><i class="fa fa-globe" aria-hidden="true"></i> <strong>Website:</strong><a href="#">view</a></li>
+                        </ul>
+                    </div>
+                    <div class="ul-list-user-right29">
+                        <img src="/Uploads/@item.Img" width="200px">
+                    </div>
+                </div>
+                <div>
+                    <p><b>Content:</b> @item.NoiDung</p><br>
+
+            <button class="btn btn-success" style="color:wheat">@Html.ActionLink("Duyệt", "DuyetBai", new {  id=item.IdBaiViet },new { style = "color: white" })</button>
+                    <button><a asp-controller="PostMN" asp-action="DeletePost" asp-route-id="@item.IdBaiViet" class="btn btn-danger" style="color:white ">Xóa Bài Viết</a></button>
+
+                </div>
+                <div class="user-social3903">
+                </div>
+            </div>
+
+
+        <!--tr>
+            <td>
+                @*Html.DisplayFor(modelItem => item.IdBaiViet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Img)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoiDung)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrangThai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLdd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ngaydang)
+            </td>
+            <td>
+                @Html.ActionLink("Duyệt", "DuyetBai", new {  id=item.IdBaiViet }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </!--tr-->
+}
+    </tbody>
+</table>

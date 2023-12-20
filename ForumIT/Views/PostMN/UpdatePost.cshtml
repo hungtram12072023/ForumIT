@@ -1,0 +1,127 @@
+﻿@model ForumIT.Models.TblBaiViet
+
+@{
+    ViewData["Title"] = "UpdatePost";
+    ForumITContext db = new ForumITContext();
+}
+
+<h2>UpdatePost</h2>
+
+@section Test{
+    <aside class="col-md-3 sidebar97239" style="margin-top:100px">
+        <div class="categori-part329">
+            <img src="/1Forum/image/logoApp.png" alt="Logo" width="200px" height="100px">
+        </div>
+    </aside>
+    }
+
+
+<hr />
+
+
+<div class="col-md-9">
+    <div class="ask-question-input-part032">
+        <h4>Ask Question</h4>
+        <hr>
+        <form asp-action="UpdatePost" enctype="multipart/form-data" method="post">
+
+            <div style="display:none">
+            <div class="form-group">
+                <label asp-for="IdBaiViet" class="control-label"></label>
+                <input asp-for="IdBaiViet" class="form-control" />
+                <span asp-validation-for="IdBaiViet" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IdUser" class="control-label"></label>
+                <input asp-for="IdUser" class="form-control" />
+                <span asp-validation-for="IdUser" class="text-danger"></span>
+            </div>
+            </div>
+
+
+            <div class="ctchua" style="display: flex; width:100%">
+                <div style="width:30%">
+                    <span class="form-description43">Question-Title* </span>
+                </div>
+                <div style="width:70%">
+                    <div style="width:70%">
+                        <input asp-for="Title" type="text" class="username029" placeholder="Enter your Name" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ctchua" style="display: flex; width:100%">
+                <div class="form-description43" style="width:30%">
+                    <span>Category* </span>
+                </div>
+                <div style="width:70%">
+                    <select asp-for="IdLdd" class="list-category53">
+                        @foreach (var x in db.TblLoaiDds)
+                        {
+                            <option class="form-description4342" value="@x.IdLoaiDd">@x.TenLoaiDd</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="ctchua" style="display: flex; width:100%">
+                <div class="form-description43" style="width:30%">
+                    <span>Attactment*</span>
+                </div>
+                <div style="width:70%">
+                    <input type="file" asp-for="Img" name="file" class="question-ttile3226">
+                </div>
+            </div>
+
+            <div class="details2-239">
+                <div class="form-description43">
+                    <span>Content*</span>
+                    <br />
+                    <textarea asp-for="NoiDung" id="txtcontent" style="width:100%"></textarea>
+                </div>
+            </div>
+
+            <div class="publish-button2389">
+                <button type="submit" class="publis1291" value="Create">Publish your Update Question</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="row">
+    
+            
+            
+            <!--div class="form-group">
+                <label asp-for="Img" class="control-label"></label>
+                <input asp-for="Img" class="form-control" />
+                <span asp-validation-for="Img" class="text-danger"></span>
+            </!--div-->
+            
+            <!--div class="form-group">
+                <label asp-for="TrangThai" class="control-label"></label>
+                <input asp-for="TrangThai" class="form-control" />
+                <span asp-validation-for="TrangThai" class="text-danger"></span>
+            </!--div-->
+            <!--div class="form-group">
+                <label asp-for="IdLdd" class="control-label"></label>
+                <input asp-for="IdLdd" class="form-control" />
+                <span asp-validation-for="IdLdd" class="text-danger"></span>
+            </!--div-->
+            
+            <!--div class="form-group">
+                <label asp-for="Ngaydang" class="control-label"></label>
+                <input asp-for="Ngaydang" class="form-control" />
+                <span asp-validation-for="Ngaydang" class="text-danger"></span>
+            </--div-->
+
+    </div>
+
+
+
+

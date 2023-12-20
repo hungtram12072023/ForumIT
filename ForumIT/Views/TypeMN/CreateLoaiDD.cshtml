@@ -1,0 +1,38 @@
+﻿@model ForumIT.Models.TblLoaiDd
+
+@{
+    ViewData["Title"] = "CreateLoaiDD";
+}
+@section Test{
+    <aside class="col-md-3 sidebar97239" style="margin-top:100px">
+        <div class="categori-part329">
+            <img src="/1Forum/image/logoApp.png" alt="Logo" width="200px" height="100px">
+        </div>
+    </aside>
+    }
+
+<h2>CreateLoaiDD</h2>
+
+<h4>TblLoaiDd</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateLoaiDD">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenLoaiDd" class="control-label"></label>
+                <input asp-for="TenLoaiDd" class="form-control" />
+                <span asp-validation-for="TenLoaiDd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListLoaiDD">Back to List</a>
+</div>
+
+

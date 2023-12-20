@@ -1,0 +1,34 @@
+﻿@model ForumIT.Models.DTO.ChangePass
+
+@section Test{
+    <aside class="col-md-3 sidebar97239" style="margin-top:100px">
+        <div class="categori-part329">
+            <img src="/1Forum/image/logoApp.png" alt="Logo" width="200px" height="100px">
+        </div>
+    </aside>
+    }
+
+<form asp-action="changePass" method="post">
+
+    <div>
+        <!--label>Password</!--label-->
+        <input type="password" class="form-control" asp-for="PasswordOld" placeholder="Password Old*" />
+        <span class="text-danger" asp-validation-for="PasswordOld"></span>
+    </div>
+
+    <div>
+        <!--label>Password</!--label-->
+        <input type="password" class="form-control" asp-for="Password" placeholder="Password New*" />
+        <span class="text-danger" asp-validation-for="Password"></span>
+    </div>
+
+    <div>
+        <!--label>Confirm Password</!--label-->
+        <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="ConfirmPassword*" />
+        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+    </div>
+
+    <input type="submit" value="Change Pass" class="button">
+
+</form>
+

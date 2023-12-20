@@ -1,0 +1,76 @@
+﻿@using ForumIT.Models.Domain;
+@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<ForumIT.Models.TblTraLoiBl>
+@using Microsoft.EntityFrameworkCore;
+@inject UserManager<User> userManager
+@{
+    ForumITContext db = new ForumITContext();
+}
+
+@foreach (var item in Model) {
+
+
+            var users = await userManager.Users.ToListAsync();
+
+            var usersInfo = new List<User>();
+
+            string name = "";
+            string idlohgin = "";
+
+            foreach (var user in users)
+            {
+                var userInfo = new User
+                    {
+                        Id = user.Id,
+                        UserName = user.UserName,
+                        Email = user.Email
+                        // Thêm các thông tin khác tùy ý
+                    };
+
+                usersInfo.Add(userInfo);
+            }
+            List<User> lst = usersInfo.ToList();
+
+            var id = userManager.GetUserId(User);
+
+            foreach (var user in lst)
+            {
+                if (user.Id == item.IdUser)
+                {
+                    name = user.UserName;
+                    idlohgin = user.Id;
+                }
+            }
+
+
+            <ul class="comments-list reply-list">
+                <li>
+                    <div class="comment-avatar"><img src="/1Forum/image/images.png" alt=""></div>
+                    <div class="comment-box">
+                        <div class="comment-head">
+                            <h6 class="comment-name"><a href="#">@name</a></h6>
+                    @{
+                        TblBinhLuan bl = db.TblBinhLuans.Find(@item.IdBluanTloi);
+                        TblBaiViet bv = db.TblBaiViets.Find(bl.IdidBaiVietBl);
+                    }
+                    @if (item.IdUser == bv.IdUser)
+                    {
+                        <a href="#" class="designetion439">Owner</a>
+                    }
+
+                            <span><i class="fa fa-clock-o" aria-hidden="true"> @item.NgayTl</i></span> 
+                            <i class="fa fa-reply"></i> <i class="fa fa-heart"></i>
+                                
+                        </div>
+                        <div class="comment-content"> @item.Noidung</div>
+                    </div>
+                </li>
+                
+            </ul>
+
+        
+}
+
+
+
+
