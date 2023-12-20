@@ -1,11 +1,11 @@
 ﻿@using ForumIT.Models.Domain;
 @using Microsoft.AspNetCore.Identity;
 @using Microsoft.EntityFrameworkCore;
-@model IEnumerable<ForumIT.Models.TblBaiViet>
-
+@*@model IEnumerable<ForumIT.Models.TblBaiViet>
+*@
 @using X.PagedList.Mvc.Core;
 
-@*@model X.PagedList.IPagedList<TblBaiViet>*@
+@model X.PagedList.IPagedList<TblBaiViet>
 
 @inject UserManager<User> userManager
 @{
@@ -101,7 +101,7 @@
             </div>
 }
 <div class="pagination">
-       @* @Html.PagedListPager(Model,page=>Url.Action("Index",new{page=page}))*@
+       @Html.PagedListPager(Model,page=>Url.Action("Index",new{page=page}))
     </div>
 
             <!--tr>

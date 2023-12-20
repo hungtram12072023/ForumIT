@@ -26,7 +26,7 @@ namespace ForumIT.Controllers
                 ViewBag.filter = filter;
                 List<TblBaiViet> danhsachKhachHang = db.TblBaiViets.Where(m => m.Title.ToLower().Contains(filter.ToLower()) == true || m.NoiDung.Contains(filter.ToLower()) == true).OrderByDescending(x => x.Ngaydang).ToList();
                 PagedList<TblBaiViet> lst = new PagedList<TblBaiViet>(danhsachKhachHang, pageNumber, pageSize);
-                return View(danhsachKhachHang);
+                return View(lst);
             }
 
             //int pageSize = 3;
@@ -34,7 +34,7 @@ namespace ForumIT.Controllers
             
             var lstMember = db.TblBaiViets.Where(x => x.TrangThai == "Duyệt").OrderByDescending(x=>x.Ngaydang).ToList();
             PagedList<TblBaiViet> lstk = new PagedList<TblBaiViet>(lstMember, pageNumber, pageSize);
-            return View(lstMember);
+            return View(lstk);
         }
 
         public IActionResult Error()
